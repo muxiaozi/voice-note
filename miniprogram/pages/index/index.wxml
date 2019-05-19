@@ -1,0 +1,26 @@
+<!--index.wxml-->
+
+<view class="listview-container">
+  <block wx:for="{{notes}}" wx:key="">
+    <view class="playlog-item" bindtap="readContent" data-content="{{item.content}}">
+      <view class="dotline">
+        <!-- 竖线 -->
+        <view class="line"></view>
+        <!-- 圆点 -->
+        <view class="dot"></view>
+        <!-- 时间戳 -->
+      </view>
+      <view class="content">
+        <text class="course">{{item.time}}</text>
+        <text class="chapter">{{item.content}}</text>
+      </view>
+    </view>
+  </block>
+</view>
+
+<view class='bottom-button-box'>
+  <button bindtap='startSpeak'>说话</button>
+  <button bindtap='stopSpeak'>停止</button>
+</view>
+
+
