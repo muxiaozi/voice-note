@@ -4,7 +4,7 @@
     "pages/schedule/schedule",
     "pages/calculator/calculator",
     "pages/calendar/calendar",
-    "pages/voice/voice"
+    "pages/edit/edit"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

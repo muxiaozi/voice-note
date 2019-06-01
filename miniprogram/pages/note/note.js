@@ -53,11 +53,7 @@ Page({
       .then(res => {
         // 添加新数据到界面
         notes_cache.unshift(res)
-        this.updateNoteList('')
-
-        console.log(notes_cache)
-
-        console.log('添加记录成功', res)
+        this.updateNoteList()
       })
       .catch(err => {
         console.error(err)
@@ -77,12 +73,12 @@ Page({
           that.readContent(event.currentTarget.dataset.content)
         }else if(res.tapIndex === 1){ // 修改内容
           wx.navigateTo({
-            url: '/pages/voice/voice',
+            url: '/pages/edit/edit?id=' + event.currentTarget.dataset.id + '&content=' + event.currentTarget.dataset.content,
           })
         }else if(res.tapIndex === 2){ // 删除
           that.deleteNote(event.currentTarget.dataset.id)
           notes_cache = notes_cache.filter(node => node.id != event.currentTarget.dataset.id)
-          that.updateNoteList('')
+          that.updateNoteList()
         }
       }
     })
@@ -102,6 +98,19 @@ Page({
   },
 
   /**
+   * 修改值回调
+   */
+  editCallback(id, content) {
+    this.updateNote(id, content)
+    notes_cache.forEach(node => {
+      if(node.id === id){
+        node.content = content
+      }
+    })
+    this.updateNoteList()
+  },
+
+  /**
    * 获取数据库中的数据
    */
   updateNotesFromDatabase(){
@@ -117,9 +126,7 @@ Page({
           })
           .reverse()  // 反转（逆序）
 
-        console.log(notes_cache)
-
-        this.updateNoteList('')
+        this.updateNoteList()
         wx.stopPullDownRefresh()
       })
       .catch(err => {
@@ -131,7 +138,7 @@ Page({
   /**
    * 根据输入的状态来更新列表
    */
-  updateNoteList(input){
+  updateNoteList(input = ''){
     let notes = notes_cache
       .filter(node => node.content.indexOf(input) !== -1) // 筛选
 
@@ -167,6 +174,27 @@ Page({
   },
 
   /**
+   * 修改笔记
+   */
+  updateNote(noteId, content){
+    return new Promise((resolve, reject) => {
+      const db = wx.cloud.database()
+      const time = Date.now()
+
+      db.collection('notes')
+        .doc(noteId)
+        .update({
+          data: {
+            time,
+            content
+          },
+          success: resolve,
+          fail: reject
+        })
+    })
+  },
+
+  /**
    * 查询笔记
    * 小程序一次最多查询20条数据，所以需要分多次拼接
    */
@@ -178,23 +206,17 @@ Page({
 
       // 先取出集合记录总数
       db.collection('notes')
-        .where({
-          _openid: openid
-        })
+        .where({ _openid: openid })
         .count()
         .then(countResult => countResult.total)
         .then(total => {
-          console.log(total)
           // 计算需分几次取
           const batchTimes = Math.ceil(total / MAX_LIMIT)
           // 承载所有读操作的 promise 的数组
           const tasks = []
           for (let i = 0; i < batchTimes; i++) {
-            console.log(i * MAX_LIMIT)
             const promise = db.collection('notes')
-              .where({
-                _openid: openid
-              })
+              .where({ _openid: openid })
               .skip(i * MAX_LIMIT)
               .limit(MAX_LIMIT)
               .get()

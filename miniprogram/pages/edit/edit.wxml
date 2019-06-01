@@ -1,0 +1,13 @@
+<form bindsubmit='submitContent'>
+  <textarea
+    maxlength='-1'
+    fixed='true'
+    placeholder="请输入文本..."
+    class="content-textarea"
+    bindblur='onContentBlur'
+    value='{{content}}' />
+
+  <button form-type='submit' class="save-btn">
+    <icon type='success' size='64' color="#1296db"></icon>
+  </button>
+</form>

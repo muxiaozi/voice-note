@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "speaker": "../../component/speaker/speaker"
+    "speaker": "../../component/speaker/speaker",
+    "pickerYMDHM": "../../component/pickerYMDHM/pickerYMDHM"
   },
+  "navigationBarTitleText": "日程",
   "enablePullDownRefresh": true
 }

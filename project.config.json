@@ -32,12 +32,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
-					"name": "voice",
-					"pathName": "pages/voice/voice",
+					"id": 0,
+					"name": "edit",
+					"pathName": "pages/edit/edit",
 					"query": "",
 					"scene": null
 				},
