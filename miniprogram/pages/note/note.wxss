@@ -1,0 +1,12 @@
+/**index.wxss**/
+
+.weui-search-bar{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.note-list{
+  z-index: 0;
+  margin-top: 48px;
+}

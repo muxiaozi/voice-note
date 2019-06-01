@@ -1,7 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/edit/edit",
+    "pages/note/note",
     "pages/schedule/schedule",
     "pages/calculator/calculator",
     "pages/calendar/calendar",
@@ -15,30 +14,32 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#1296db",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/note/note",
         "text": "记事本",
-        "iconPath": "images/user_unlogin.png",
-        "selectedIconPath": "images/user_unlogin.png"
+        "iconPath": "images/note_normal.png",
+        "selectedIconPath": "images/note_selected.png"
       },
       {
         "pagePath": "pages/schedule/schedule",
         "text": "日程",
-        "iconPath": "images/user_unlogin.png",
-        "selectedIconPath": "images/user_unlogin.png"
+        "iconPath": "images/schedule_normal.png",
+        "selectedIconPath": "images/schedule_selected.png"
       },
       {
         "pagePath": "pages/calculator/calculator",
         "text": "计算器",
-        "iconPath": "images/user_unlogin.png",
-        "selectedIconPath": "images/user_unlogin.png"
+        "iconPath": "images/calculator_normal.png",
+        "selectedIconPath": "images/calculator_selected.png"
       },
       {
         "pagePath": "pages/calendar/calendar",
         "text": "日历",
-        "iconPath": "images/user_unlogin.png",
-        "selectedIconPath": "images/user_unlogin.png"
+        "iconPath": "images/calendar_normal.png",
+        "selectedIconPath": "images/calendar_selected.png"
       }
     ]
   },

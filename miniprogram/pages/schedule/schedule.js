@@ -5,7 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    schedules: [
+      {
+        content: '你是一个大傻瓜',
+        time: '2019-01-01 10:10',
+        state: '已过期'
+      }
+    ]
   },
 
   /**
@@ -13,6 +19,29 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  /**
+   * 长按日程事件
+   */
+  onLongTapSchedule(event) {
+    wx.showActionSheet({
+      itemList: ['语音播报', '修改内容', '修改日期', '删除'],
+      itemColor: '#1296db',
+      success(res) {
+        if (res.tapIndex === 0) {
+
+        } else if (res.tapIndex === 1) {
+          wx.navigateTo({
+            url: '/pages/voice/voice',
+          })
+        } else if (res.tapIndex === 2) {
+
+        } else if( res.tapIndex === 3) {
+
+        }
+      }
+    })
   },
 
   /**

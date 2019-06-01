@@ -1,0 +1,4 @@
+<!--component/speaker/speaker.wxml-->
+<view class="speaker-btn" bindtouchstart='startSpeak' bindtouchend='stopSpeak'>
+  <image class='speaker-btn-img' src='../../images/voice.png'></image>
+</view>

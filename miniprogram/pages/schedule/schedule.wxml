@@ -1,2 +1,19 @@
-<!--miniprogram/pages/schedule/schedule.wxml-->
+<view class="weui-panel">
+  <view class="weui-panel__bd">
 
+    <view wx:for="{{schedules}}"
+      class="weui-media-box weui-media-box_text"
+      bindlongtap='onLongTapSchedule'
+      data-id='{{item.id}}'>
+      <view class="weui-media-box__desc">{{item.content}}</view>
+      <view class="weui-media-box__info">
+        <view class="weui-media-box__info__meta">{{item.time}}</view>
+        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{item.state}}</view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<!-- 话筒组件 -->
+<speaker bind:speak="onSpeak" />

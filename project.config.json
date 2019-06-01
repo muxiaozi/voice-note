@@ -12,7 +12,7 @@
 	},
 	"appid": "wx25507cc8b7577871",
 	"projectname": "voice-note",
-	"libVersion": "2.2.3",
+	"libVersion": "2.3.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -32,18 +32,41 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
-				},
 				{
 					"id": -1,
 					"name": "voice",
 					"pathName": "pages/voice/voice",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "schedule",
+					"pathName": "pages/schedule/schedule",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "calendar",
+					"pathName": "pages/calendar/calendar",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "calculator",
+					"pathName": "pages/calculator/calculator",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "note",
+					"pathName": "pages/note/note",
+					"query": "",
 					"scene": null
 				}
 			]

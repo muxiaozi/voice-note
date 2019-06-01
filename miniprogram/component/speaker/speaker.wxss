@@ -1,13 +1,7 @@
-/* miniprogram/pages/voice/voice.wxss */
+/* component/speaker/speaker.wxss */
 
-.voice-textarea{
-  width: 100%;
-  height: 100vh;
-  z-index: 0;
-}
-
-.voice-btn{
-  position: absolute;
+.speaker-btn{
+  position: fixed;
   z-index: 1;
   width: 64px;
   height: 64px;
@@ -16,10 +10,14 @@
   right: 0px;
   left: 0px;
   margin: auto;
-  background-color: goldenrod;
+  background-color: rgba(18, 150, 219, 0.35);
 }
 
-.voice-btn-img{
+.speaker-btn:active{
+  background-color: #1296db;
+}
+
+.speaker-btn-img{
   position: absolute;
   width: 48px;
   height: 48px;
