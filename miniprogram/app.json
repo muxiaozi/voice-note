@@ -1,7 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/me/me"
+    "pages/edit/edit",
+    "pages/schedule/schedule",
+    "pages/calculator/calculator",
+    "pages/calendar/calendar",
+    "pages/voice/voice"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -9,6 +13,34 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "语音记事本",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "记事本",
+        "iconPath": "images/user_unlogin.png",
+        "selectedIconPath": "images/user_unlogin.png"
+      },
+      {
+        "pagePath": "pages/schedule/schedule",
+        "text": "日程",
+        "iconPath": "images/user_unlogin.png",
+        "selectedIconPath": "images/user_unlogin.png"
+      },
+      {
+        "pagePath": "pages/calculator/calculator",
+        "text": "计算器",
+        "iconPath": "images/user_unlogin.png",
+        "selectedIconPath": "images/user_unlogin.png"
+      },
+      {
+        "pagePath": "pages/calendar/calendar",
+        "text": "日历",
+        "iconPath": "images/user_unlogin.png",
+        "selectedIconPath": "images/user_unlogin.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,12 +1,39 @@
 //index.js
 const app = getApp()
-const xunfei = require('../../utils/xunfei.js');
+const xunfei = require('../../utils/xunfei.js')
 
 let recorderManager = null;
 
 Page({
   data: {
-    notes: []
+    notes: [],
+    inputShowed: false,
+    inputVal: ""
+  },
+
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+  },
+  
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
   },
 
   onLoad: function() {
@@ -239,7 +266,7 @@ Page({
     }
 
     return new Promise((resolve, reject) => {
-      let cloudPath = 'voice-temp.aac';
+      let cloudPath = String(Date.now()) + '.aac';
 
       wx.cloud.uploadFile({
         filePath,

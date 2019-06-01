@@ -1,5 +1,3 @@
-const app = getApp()
-
 /**
  * 语音识别
  * @param filepath 语音文件路径

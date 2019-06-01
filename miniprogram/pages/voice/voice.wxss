@@ -1,0 +1,31 @@
+/* miniprogram/pages/voice/voice.wxss */
+
+.voice-textarea{
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+
+.voice-btn{
+  position: fixed;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  bottom: 20px;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+  background-color: goldenrod;
+}
+
+.voice-btn-img{
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+}
