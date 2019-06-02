@@ -1,3 +1,5 @@
+const xunfei = require('../../utils/xunfei.js')
+
 Page({
   data: {
     value: null, // 上次计算后的结果，null表示没有上次计算的结果
@@ -38,6 +40,7 @@ Page({
 
     switch (key) {
       case 'key-clear':
+        this.playVoice(`/voice/clear.mp3`)
         if (this.data.displayValue !== '0') {
           this.clearDisplay();
         } else {
@@ -47,8 +50,15 @@ Page({
         break;
 
       case 'key-sign':
+        
         var newValue = parseFloat(this.data.displayValue) * -1
 
+        if (newValue >= 0){
+          this.playVoice(`/voice/postive.mp3`)
+        }else{
+          this.playVoice(`/voice/negative.mp3`)
+        }
+        
         this.setData({
           displayValue: String(newValue)
         })
@@ -56,6 +66,7 @@ Page({
         break;
 
       case 'key-percent':
+        this.playVoice(`/voice/percent.mp3`)
         const fixedDigits = this.data.displayValue.replace(/^-?\d*\.?/, '')
         var newValue = parseFloat(this.data.displayValue) / 100
 
@@ -74,6 +85,25 @@ Page({
     const nextOperator = event.target.dataset.key;
     const inputValue = parseFloat(this.data.displayValue);
 
+    switch(event.target.dataset.key)
+    {
+      case 'key-add':
+        this.playVoice(`/voice/add.mp3`)
+        break;
+      case 'key-subtract':
+        this.playVoice(`/voice/sub.mp3`)
+        break;
+      case 'key-multiply':
+        this.playVoice(`/voice/multi.mp3`)
+        break;
+      case 'key-divide':
+        this.playVoice(`/voice/div.mp3`)
+        break;
+      case 'key-equals':
+        this.playVoice(`/voice/equal.mp3`)
+        break;
+    }
+
     if (this.data.value == null) {
       this.setData({
         value: inputValue
@@ -81,6 +111,16 @@ Page({
     } else if (this.data.operator) {
       const currentValue = this.data.value || 0;
       const newValue = this.calculatorOperations[this.data.operator](currentValue, inputValue);
+
+      if (event.target.dataset.key === 'key-equals'){
+        setTimeout(() => {
+          if(Number.isFinite(newValue)){
+            this.readContent(String(newValue))
+          }else{
+            this.playVoice(`/voice/error.mp3`)
+          }
+        }, 300)
+      }
 
       this.setData({
         value: newValue,
@@ -98,6 +138,8 @@ Page({
     const key = event.target.dataset.key; // 根据data-key标记按键
 
     if (key == 'key-dot') {
+      this.playVoice('/voice/dot.mp3')
+
       // 按下点号
       if (!(/\./).test(this.data.displayValue)) {
         this.setData({
@@ -108,6 +150,8 @@ Page({
     } else {
       // 按下数字键
       const digit = key[key.length - 1];
+
+      this.playVoice(`/voice/${String(digit)}.mp3`)
 
       if (this.data.waitingForOperand) {
         this.setData({
@@ -120,5 +164,31 @@ Page({
         })
       }
     }
+  },
+
+  /**
+   * 语音合成
+   */
+  readContent(content) {
+    xunfei.tts(content)
+      .then(tempFilePath => {
+        // 播放tempFilePath
+        this.playVoice(tempFilePath)
+      })
+      .catch(err => console.error)
+  },
+
+  /**
+   * 播放音频
+   */
+  playVoice(voicePath){
+    const innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.autoplay = true
+    innerAudioContext.src = voicePath
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放', voicePath)
+    })
+    innerAudioContext.onError(res => console.error)
+    innerAudioContext.play()
   }
 })

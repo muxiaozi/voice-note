@@ -23,12 +23,14 @@ Page({
       inputVal: "",
       inputShowed: false
     });
+    this.updateNoteList()
   },
 
   clearInput: function () {
     this.setData({
       inputVal: ""
     });
+    this.updateNoteList()
   },
   
   inputTyping: function (e) {
@@ -48,16 +50,23 @@ Page({
       return
     }
 
-    this.uploadVoice(tempFilePath)     // 上传音频文件
-      .then(fileID => this.addNote(content, fileID)) // 上传数据库
-      .then(res => {
-        // 添加新数据到界面
-        notes_cache.unshift(res)
-        this.updateNoteList()
+    // 在搜索状态
+    if (this.data.inputShowed){
+      let inputVal = content.replace('。', '')
+      this.setData({
+        inputVal
       })
-      .catch(err => {
-        console.error(err)
-      })
+      this.updateNoteList(inputVal)
+    }else{ // 在记事本状态
+      this.uploadVoice(tempFilePath)     // 上传音频文件
+        .then(fileID => this.addNote(content, fileID)) // 上传数据库
+        .then(res => {
+          // 添加新数据到界面
+          notes_cache.unshift(res)
+          this.updateNoteList()
+        })
+        .catch(err => console.error)
+    }
   },
 
   /**
